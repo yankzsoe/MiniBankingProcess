@@ -6,6 +6,7 @@ namespace Identity.Framework.Data.Interface {
         Task<(int, int)> CreateAsync(UserCredentialEntity userCredential, UserProfileEntity userProfile, UserBankAccountEntity userBankAccount);
         Task<UserCredentialEntity> GetAsync(string username, string password);
         Task<bool> CheckUsernameAsync(string username);
-        Task<UserCredentialEntity> UpdateAsync(string username, string oldPassword, string newPassword);
+        Task<UserCredentialEntity> UpdatePasswordAsync(UserCredentialEntity userCredentialEntity);
+        Task DeleteAccountAsync(UserCredentialEntity account);
     }
 }

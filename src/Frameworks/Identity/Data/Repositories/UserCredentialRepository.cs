@@ -51,8 +51,16 @@ namespace Identity.Framework.Data.Repositories {
                 .FirstOrDefaultAsync(e => e.UserName == username && e.Password == password);
         }
 
-        public Task<UserCredentialEntity> UpdateAsync(string username, string oldPassword, string newPassword) {
-            throw new NotImplementedException();
+        public async Task<UserCredentialEntity> UpdatePasswordAsync(UserCredentialEntity userCredentialEntity) {
+             _userCredentialEntity.Update(userCredentialEntity);
+            await _dbContext.SaveChangesAsync();
+            return await Task.FromResult(userCredentialEntity);
+        }
+
+        public async Task DeleteAccountAsync(UserCredentialEntity account) {
+            _userCredentialEntity.Remove(account);
+            await _dbContext.SaveChangesAsync();
+            await Task.CompletedTask;
         }
     }
 }
