@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "5b973720-9f30-4a10-9b8e-d97114bc38b4",
+		"name": "MiniBankingProcess",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7232221"
+	},
+	"item": [
+		{
+			"name": "Identity Services",
+			"item": [
+				{
+					"name": "identity.authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set apikey\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    console.log(jsonData.auth_token);\r",
+									"    pm.environment.set(\"apikey\", jsonData.auth_token)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\":\"test\",\r\n    \"Password\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlIdentityWebApi}}api/user/authenticate",
+							"host": [
+								"{{baseUrlIdentityWebApi}}api"
+							],
+							"path": [
+								"user",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "identity.createuser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Fullname\":\"Fullname\",\r\n    \"Dob\": \"1999-09-27\",\r\n    \"UserAccount\":{\r\n        \"Username\":\"user_test\",\r\n        \"Password\":\"test@123\"\r\n    },\r\n    \"BankAccount\": {\r\n        \"AccountNumber\": \"1230000001\",\r\n        \"Currency\": \"IDR\",\r\n        \"Deposit\": \"100\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlIdentityWebApi}}api/user/register",
+							"host": [
+								"{{baseUrlIdentityWebApi}}api"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "gateway.authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"set apikey\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    console.log(jsonData.auth_token);\r",
+									"    pm.environment.set(\"apikey\", jsonData.auth_token)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\":\"test\",\r\n    \"Password\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlGateway}}user/authenticate",
+							"host": [
+								"{{baseUrlGateway}}user"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gateway.createuser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apikey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Fullname\":\"Fullname test\",\r\n    \"Dob\": \"1999-09-27\",\r\n    \"UserAccount\":{\r\n        \"Username\":\"user_test\",\r\n        \"Password\":\"test@123\"\r\n    },\r\n    \"BankAccount\": {\r\n        \"AccountNumber\": \"1234799900\",\r\n        \"Currency\": \"IDR\",\r\n        \"Deposit\": \"1000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:54784/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "54784",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gateway.balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apikey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlGateway}}account/balance",
+							"host": [
+								"{{baseUrlGateway}}account"
+							],
+							"path": [
+								"balance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "trx.balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apikey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrlTrxWebApi}}api/account/balance",
+							"host": [
+								"{{baseUrlTrxWebApi}}api"
+							],
+							"path": [
+								"account",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "trx.deposit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{apiKey}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlTrxWebApi}}api/account/deposit",
+							"host": [
+								"{{baseUrlTrxWebApi}}api"
+							],
+							"path": [
+								"account",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrlGateway",
+			"value": "http://localhost:54784/",
+			"type": "string"
+		},
+		{
+			"key": "baseUrlIdentityWebApi",
+			"value": "http://localhost:54203/",
+			"type": "string"
+		},
+		{
+			"key": "baseUrlTrxWebApi",
+			"value": "http://localhost:60243/",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50bnVtYmVyIjoiMTIzNDU2Nzg5MCIsImN1cnJlbmN5IjoiSURSIiwibmFtZSI6ImZ1bGxuYW1lIHRlc3QiLCJuYmYiOjE2OTQ1MDM1NzQsImV4cCI6MTY5NTEwODM3NCwiaWF0IjoxNjk0NTAzNTc0fQ.V4_BORoh7WUwryQzuqvjDtMD6IBVICrIQXFrddxKRog",
+			"type": "string"
+		}
+	]
+}
