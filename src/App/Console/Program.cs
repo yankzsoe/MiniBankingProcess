@@ -98,6 +98,7 @@ namespace FakeATM.ConsoleApp {
 
         static void DisplayMenu() {
             Console.WriteLine();
+            Console.WriteLine("=================================================");
             Console.WriteLine("1. Balance");
             Console.WriteLine("2. Deposit");
             Console.WriteLine("3. Withdraw");
