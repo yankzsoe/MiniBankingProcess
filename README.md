@@ -1,5 +1,5 @@
 # MiniBankingProcess
-this project for technical test purpose 
+Sample microservices in NET 6.0
 
 ## Step by step run this project
 1. Run Migration
