@@ -1,25 +1,20 @@
-﻿using Identity.Framework.Helpers;
+﻿using AutoMapper;
+using Identity.Framework.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using RabbitMQ.Client.Events;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Transaction.Framework.Services;
+using Transaction.Framework.Domain;
 using Transaction.Framework.Services.Interface;
 using Transaction.Framework.Types;
-using Microsoft.Extensions.Logging;
-using System.Net.Http;
-using Transaction.Framework.Domain;
 using Transaction.WebApi.Models;
-using AutoMapper;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Transaction.WebApi.Services {
     public class MessageConsumerService : BackgroundService {
@@ -60,7 +55,7 @@ namespace Transaction.WebApi.Services {
                         try {
                             RegisterModel registerModel = JsonConvert.DeserializeObject<RegisterModel>(jsonString);
                             var result = await ProcessMessage(registerModel, stoppingToken);
-                                
+
                         } catch (Exception ex) {
                             _logger.LogError(ex, $"Error Occured On MessageConsumerService Process: {ex.Message}");
                         }

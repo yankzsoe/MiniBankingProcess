@@ -1,6 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
 using System.Text.Json;
-using System;
+using System.Text.Json.Serialization;
 
 namespace Identity.WebApi.Helpers {
     public sealed class DateOnlyJsonConverter : JsonConverter<DateOnly> {

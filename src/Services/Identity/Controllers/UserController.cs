@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Identity.Framework.Domain;
-using Identity.Framework.Services;
 using Identity.Framework.Services.Interface;
 using Identity.WebApi.Models;
 using Microsoft.AspNetCore.Authorization;

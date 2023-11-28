@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.OpenApi.Models;
+using Transaction.Framework.Extensions;
 using Transaction.WebApi.Middlewares;
 using Transaction.WebApi.Services;
-using Transaction.Framework.Extensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Transaction.WebApi.Mappers;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,10 +1,10 @@
-﻿using Identity.WebApi.Helpers;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Identity.Framework.Extensions;
+﻿using Identity.Framework.Extensions;
+using Identity.WebApi.Helpers;
 using Identity.WebApi.Mappers;
 using Identity.WebApi.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 

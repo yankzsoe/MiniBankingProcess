@@ -54,7 +54,7 @@ namespace Identity.WebApi.Middlewares {
             var response = JsonConvert.SerializeObject(result, Formatting.Indented,
                 new JsonSerializerSettings {
                     NullValueHandling = NullValueHandling.Ignore,
-                    
+
                 });
             context.Response.StatusCode = statusCode;
             await context.Response.WriteAsync(response);
