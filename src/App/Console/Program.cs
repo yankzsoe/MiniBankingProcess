@@ -109,6 +109,10 @@ namespace FakeATM.ConsoleApp {
 
         static async Task ShowBalance() {
             var transactionResult = await BalanceAsync();
+            if (transactionResult == null) {
+                Console.WriteLine("\nAccount Not Found.");
+                return;
+            }
 
             Console.WriteLine();
             Console.WriteLine("Balance");
